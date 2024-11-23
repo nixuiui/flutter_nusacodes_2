@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_nusacodes_2/components/counter_widget.dart';
-import 'package:flutter_nusacodes_2/helpers/helper.dart';
 
 class ProfilePage extends StatefulWidget {
-  const ProfilePage({super.key});
+
+  const ProfilePage({
+    super.key,
+  });
 
   @override
   State<ProfilePage> createState() => _ProfilePageState();
@@ -11,13 +12,25 @@ class ProfilePage extends StatefulWidget {
 
 class _ProfilePageState extends State<ProfilePage> {
 
-  String name = "Niki";
+  late String name;
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  void didChangeDependencies() {
+    final args = ModalRoute.of(context)!.settings.arguments! as Map<String, dynamic>;
+    name = args['name'];
+    super.didChangeDependencies();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Profile $name'),
+        title: const Text('Profile Screen'),
         actions: [
           IconButton(
             onPressed: () {}, 
@@ -29,21 +42,30 @@ class _ProfilePageState extends State<ProfilePage> {
           ),
         ],
       ),
-      body: Center(
-        child: Column(
-          children: [
-            Text(
-              "Luas Segitiga: ${luasSegitiga(10, 8)}",
-              style: const TextStyle(
-                fontSize: 32,
+      body: ListView(
+        padding: const EdgeInsets.all(16),
+        children: [
+          Column(
+            children: [
+              const CircleAvatar(
+                backgroundImage: NetworkImage("https://akcdn.detik.net.id/community/media/visual/2022/12/25/lionel-messi_169.jpeg?w=600&q=90"),
               ),
-            ),
-            const CounterWidget(
-              counter: 10,
-              description: "Nomor:",
-            ),
-          ],
-        ),
+              const SizedBox(height: 8),
+              Text(
+                name,
+                style: const TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold
+                ),
+              ),
+              const SizedBox(height: 16),
+              FilledButton(
+                onPressed: () => Navigator.pop(context, true), 
+                child: const Text("Back to Home")
+              )
+            ],
+          ),
+        ],
       ),
     );
   }

@@ -1,23 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_nusacodes_2/components/counter_widget.dart';
+import 'package:flutter_nusacodes_2/consts/routes.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({super.key, required this.title});
-
-  final String title;
+  const HomePage({super.key});
 
   @override
   State<HomePage> createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
-  int _counter = 0;
 
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
+  final names = [
+    "Lionel Messi",
+    "Ronaldo",
+    "Neymar",
+    "Kaka"
+  ];
+
+  var index = 0;
 
   @override
   void initState() {
@@ -29,103 +29,41 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(widget.title),
+        title: const Text("Home Page"),
       ),
-      body: Center(
-        child: ListView(
-          padding: const EdgeInsets.all(32),
-          children: [
-            Container(
-              width: 100,
-              height: 100,
-              color: Colors.yellow,
-              child: const Center(
-                child: Text('Hello')
-              ),
-            ),
-            Container(
-              width: 200,
-              margin: const EdgeInsets.all(20),
-              padding: const EdgeInsets.symmetric(
-                vertical: 40
-              ),
-              decoration: BoxDecoration(
-                color: Colors.blue,
-                borderRadius: BorderRadius.circular(16),
-                border: Border.all(color: Colors.red, width: 5),
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  IconButton.outlined(
-                    onPressed: () {}, 
-                    icon: const Icon(Icons.add),
-                  ),
-                  TextButton.icon(
-                    onPressed: () {}, 
-                    iconAlignment: IconAlignment.end,
-                    label: const Text('Login'),
-                    icon: const Icon(Icons.login),
-                  ),
-                ],
-              ),
-            ),
-            SizedBox(
-              width: 100,
-              height: 100,
-              child: OutlinedButton.icon(
-                onPressed: () {}, 
-                iconAlignment: IconAlignment.end,
-                label: const Text('Login'),
-                icon: const Icon(Icons.login),
-              ),
-            ),
-            FilledButton.tonalIcon(
-              onPressed: () {}, 
-              iconAlignment: IconAlignment.end,
-              label: const Text('Login'),
-              icon: const Icon(Icons.login),
-            ),
-            const SizedBox(height: 16),
-            FilledButton.icon(
-              onPressed: () {}, 
-              iconAlignment: IconAlignment.end,
-              label: const Text('Login'),
-              icon: const Icon(Icons.login),
-            ),
-            const SizedBox(height: 16),
-            ElevatedButton.icon(
-              onPressed: () {}, 
-              iconAlignment: IconAlignment.start,
-              label: const Text('Login'),
-              icon: const Icon(Icons.login),
-            ),
-            Container(
-              color: Colors.grey,
-              child: Image.network(
-                "https://akcdn.detik.net.id/community/media/visual/2022/12/25/lionel-messi_169.jpeg?w=600&q=90",
-                width: 200,
-                height: 200,
-                fit: BoxFit.cover,
-              ),
-            ),
-            Container(
-              color: Colors.grey,
-              child: Image.asset(
-                "assets/icon.png",
-                width: 200,
-                height: 200,
-                fit: BoxFit.cover,
-              ),
-            ),
-            CounterWidget(
-              counter: _counter,
-              description: "Nomor:",
-              onPressed: _incrementCounter,
-            ),
-          ],
-        ),
+      body: ListView(
+        padding: const EdgeInsets.all(16),
+        children: [
+          Text(
+            names[index],
+            textAlign: TextAlign.center,
+          ),
+          FilledButton(
+            onPressed: () async {
+              final result = await Navigator.pushNamed(
+                context, 
+                AppRoutes.profile,
+                arguments: {
+                  "name": names[index]
+                }
+              );
+              if(result != null) {
+                if(result == true) {
+                  setState(() {
+                    if(index == 3) {
+                      index = 0;
+                    } else {
+                      index++;
+                    }
+                  });
+                }
+              }
+            }, 
+            child: const Text("Open Profile Page"),
+          ),
+        ],
       ),
+      
     );
   }
 }

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_nusacodes_2/consts/colors.dart';
-import 'package:flutter_nusacodes_2/pages/splash_screen.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter_nusacodes_2/consts/routes.dart';
 
 void main() {
   runApp(const MyApp());
@@ -20,21 +19,9 @@ class MyApp extends StatelessWidget {
           primary: ColorCustom.primary,
         ),
         useMaterial3: true,
-        appBarTheme: AppBarTheme(
-          titleTextStyle: GoogleFonts.notoSerif(
-            color: Colors.black,
-            fontSize: 22,
-          ),
-          iconTheme: const IconThemeData(
-            color: Colors.yellow
-          )
-        ),
-        iconTheme: const IconThemeData(
-          color: Colors.orange,
-          size: 40
-        )
       ),
-      home: const SplashScreen(),
+      initialRoute: AppRoutes.splash,
+      routes: routes,
     );
   }
 }
