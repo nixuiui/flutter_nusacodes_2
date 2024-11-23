@@ -36,11 +36,21 @@ class _HomePageState extends State<HomePage> {
           padding: const EdgeInsets.all(32),
           children: [
             Container(
+              width: 100,
+              height: 100,
+              color: Colors.yellow,
+              child: const Center(
+                child: Text('Hello')
+              ),
+            ),
+            Container(
               width: 200,
-              height: 200,
-              margin: const EdgeInsets.only(bottom: 16),
+              margin: const EdgeInsets.all(20),
+              padding: const EdgeInsets.symmetric(
+                vertical: 40
+              ),
               decoration: BoxDecoration(
-                color: Colors.green,
+                color: Colors.blue,
                 borderRadius: BorderRadius.circular(16),
                 border: Border.all(color: Colors.red, width: 5),
               ),
@@ -76,12 +86,14 @@ class _HomePageState extends State<HomePage> {
               label: const Text('Login'),
               icon: const Icon(Icons.login),
             ),
+            const SizedBox(height: 16),
             FilledButton.icon(
               onPressed: () {}, 
               iconAlignment: IconAlignment.end,
               label: const Text('Login'),
               icon: const Icon(Icons.login),
             ),
+            const SizedBox(height: 16),
             ElevatedButton.icon(
               onPressed: () {}, 
               iconAlignment: IconAlignment.start,
