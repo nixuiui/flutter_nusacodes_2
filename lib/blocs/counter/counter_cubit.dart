@@ -5,9 +5,9 @@ class CounterCubit extends Cubit<CounterState> {
 
   CounterCubit() : super(const CounterState(counter: 0));
 
-  void increment() {
+  void increment(int countNumber) {
     final lastCounter = state.counter;
-    emit(state.copyWith(counter: lastCounter+1));
+    emit(state.copyWith(counter: lastCounter+countNumber));
   }
 
   void decrement() {

@@ -1,5 +1,6 @@
 import 'package:flutter_nusacodes_2/pages/counter_page.dart';
 import 'package:flutter_nusacodes_2/pages/home_page.dart';
+import 'package:flutter_nusacodes_2/pages/login_page.dart';
 import 'package:flutter_nusacodes_2/pages/main_page.dart';
 import 'package:flutter_nusacodes_2/pages/profile_page.dart';
 import 'package:flutter_nusacodes_2/pages/splash_screen.dart';
@@ -14,6 +15,7 @@ class AppRoutes {
   static String get tabNavigation => "/tab-navigation";
   static String get webView => "/web-view";
   static String get counter => "/counter";
+  static String get login => "/login";
 }
 
 final routes = {
@@ -24,4 +26,5 @@ final routes = {
   AppRoutes.tabNavigation: (context) => const TabNavigationPage(),
   AppRoutes.webView: (context) => const WebViewPage(),
   AppRoutes.counter: (context) => const CounterPage(),
+  AppRoutes.login: (context) => const LoginPage(),
 };
