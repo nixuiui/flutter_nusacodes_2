@@ -24,6 +24,10 @@ class _HomeTabState extends State<HomeTab> {
             FilledButton(
               onPressed: () => Navigator.pushNamed(context, AppRoutes.tabNavigation), 
               child: const Text("Tab Navigation")
+            ),
+            FilledButton(
+              onPressed: () => Navigator.pushNamed(context, AppRoutes.counter), 
+              child: const Text("Counter")
             )
           ],
         )
