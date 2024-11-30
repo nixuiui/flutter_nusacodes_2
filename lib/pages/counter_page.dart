@@ -40,7 +40,7 @@ class _CounterPageState extends State<CounterPage> {
               }
             ),
             FilledButton(
-              onPressed: () {
+              onPressed: () async {
                 counterCubit.increment(2);
                 counterBloc.add(CounterEventIncrement(2));
               }, 

@@ -41,6 +41,12 @@ dependencies:
   hive: ^2.2.3
   path_provider: ^2.0.12
   get_it: ^8.0.2
+  drift: ^2.22.0
+  sqflite: ^2.4.1
+  drift_dev: ^2.22.0
+  build_runner: ^2.4.13
+  sqlite3_flutter_libs: ^0.5.26
+  drift_db_viewer: ^2.1.0
 
 dev_dependencies:
   flutter_test:
