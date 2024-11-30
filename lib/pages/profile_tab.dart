@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_nusacodes_2/blocs/auth/auth_cubit.dart';
 import 'package:flutter_nusacodes_2/blocs/auth/auth_state.dart';
+import 'package:flutter_nusacodes_2/consts/routes.dart';
 
 class ProfileTab extends StatefulWidget {
   const ProfileTab({super.key});
@@ -42,6 +43,16 @@ class _ProfileTabState extends State<ProfileTab> {
                       fontSize: 16,
                     ),
                   ),
+                  const SizedBox(height: 8),
+                  OutlinedButton(
+                    onPressed: () async {
+                      await context.read<AuthCubit>().logout();
+                      if(context.mounted) {
+                        Navigator.pushReplacementNamed(context, AppRoutes.login);
+                      }
+                    }, 
+                    child: const Text("Logout")
+                  )
                 ],
               );
             }

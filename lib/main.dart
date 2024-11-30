@@ -3,8 +3,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_nusacodes_2/blocs/auth/auth_cubit.dart';
 import 'package:flutter_nusacodes_2/consts/colors.dart';
 import 'package:flutter_nusacodes_2/consts/routes.dart';
+import 'package:flutter_nusacodes_2/helpers/injector.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  
+  await setupInjector();
+
   runApp(const MyApp());
 }
 
@@ -15,7 +20,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (context) => AuthCubit()),
+        BlocProvider(create: (context) => AuthCubit(
+          getIt.get()
+        )),
       ],
       child: MaterialApp(
         title: 'Nusacodes Batch 2',
