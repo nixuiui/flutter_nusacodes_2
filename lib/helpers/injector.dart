@@ -4,6 +4,8 @@ import 'package:flutter_nusacodes_2/data/local_storage/auth_local_storage.dart';
 import 'package:flutter_nusacodes_2/data/local_storage/other_local_storage.dart';
 import 'package:flutter_nusacodes_2/data/remote_data/auth_remote_data.dart';
 import 'package:flutter_nusacodes_2/data/remote_data/network_service/network_service.dart';
+import 'package:flutter_nusacodes_2/data/remote_data/product_remote_data.dart';
+import 'package:flutter_nusacodes_2/data/remote_data/sales_remote_data.dart';
 import 'package:get_it/get_it.dart';
 import 'package:hive/hive.dart';
 import 'package:path_provider/path_provider.dart';
@@ -42,4 +44,6 @@ void dbInjector() {
 void networkInjector() {
   getIt.registerSingleton(NetworkService(getIt.get()));
   getIt.registerSingleton(AuthRemoteData(getIt.get()));
+  getIt.registerSingleton(ProductRemoteData(getIt.get()));
+  getIt.registerSingleton(SalesRemoteData(getIt.get()));
 }

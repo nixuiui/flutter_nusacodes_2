@@ -23,7 +23,7 @@ class AuthCubit extends Cubit<AuthState> {
     ));
 
     try {
-      final response = await authRemoteData.login(email, password);
+      final response = await authRemoteData.postLogin(email, password);
       await authLocalStorage.setToken(response.accessToken ?? '');
       await authLocalStorage.setUser(response.user!);
 

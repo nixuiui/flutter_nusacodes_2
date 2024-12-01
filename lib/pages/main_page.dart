@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_nusacodes_2/pages/home/invoice_tab.dart';
+import 'package:flutter_nusacodes_2/pages/home/profile_tab.dart';
 import 'package:flutter_nusacodes_2/pages/home_tab.dart';
-import 'package:flutter_nusacodes_2/pages/invoice_tab.dart';
-import 'package:flutter_nusacodes_2/pages/profile_tab.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key});

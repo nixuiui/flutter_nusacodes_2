@@ -8,7 +8,7 @@ class AuthRemoteData {
 
   AuthRemoteData(this.networkService);
 
-  Future<AuthResponseModel> login(String email, String password) async {
+  Future<AuthResponseModel> postLogin(String email, String password) async {
     final response = await networkService.post(
       url: "/api/auth/login",
       data: {

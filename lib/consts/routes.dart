@@ -1,7 +1,8 @@
 import 'package:flutter_nusacodes_2/pages/counter_page.dart';
-import 'package:flutter_nusacodes_2/pages/home_page.dart';
+import 'package:flutter_nusacodes_2/pages/home/home_page.dart';
 import 'package:flutter_nusacodes_2/pages/login_page.dart';
 import 'package:flutter_nusacodes_2/pages/main_page.dart';
+import 'package:flutter_nusacodes_2/pages/order_summary_screen.dart';
 import 'package:flutter_nusacodes_2/pages/product_page.dart';
 import 'package:flutter_nusacodes_2/pages/profile_page.dart';
 import 'package:flutter_nusacodes_2/pages/splash_screen.dart';
@@ -18,6 +19,7 @@ class AppRoutes {
   static String get counter => "/counter";
   static String get login => "/login";
   static String get product => "/product";
+  static String get orderSummaryScreen => "/order-summary-screen";
 }
 
 final routes = {
@@ -30,4 +32,5 @@ final routes = {
   AppRoutes.counter: (context) => const CounterPage(),
   AppRoutes.login: (context) => const LoginPage(),
   AppRoutes.product: (context) => const ProductPage(),
+  AppRoutes.orderSummaryScreen: (context) => const OrderSummaryScreen(),
 };

@@ -34,7 +34,6 @@ class _LoginPageState extends State<LoginPage> {
             (p.isLoggedIn == false && c.isLoggedIn == true)
           ),
           listener: (context, state) {
-            print('state.isLoggedIn: ${state.isLoggedIn}');
             if(state.errorMessage != '') {
               showDialog(
                 context: context, 
@@ -50,7 +49,7 @@ class _LoginPageState extends State<LoginPage> {
                 )
               );
             } else if(state.isLoggedIn) {
-              Navigator.pushReplacementNamed(context, AppRoutes.main);
+              Navigator.pushReplacementNamed(context, AppRoutes.home);
             }
           },
         ),

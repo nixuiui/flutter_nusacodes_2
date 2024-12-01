@@ -24,7 +24,7 @@ class _SplashScreenState extends State<SplashScreen> {
     if(mounted) {
       final isLoggedIn = context.read<AuthCubit>().isLoggedIn();
       if(isLoggedIn) {
-        Navigator.pushReplacementNamed(context, AppRoutes.main);
+        Navigator.pushReplacementNamed(context, AppRoutes.home);
       } else {
         Navigator.pushReplacementNamed(context, AppRoutes.login);
       }

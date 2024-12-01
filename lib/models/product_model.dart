@@ -1,29 +1,31 @@
-import 'dart:convert';
-
-ProductModel productModelFromJson(String str) => ProductModel.fromJson(json.decode(str));
-
-String productModelToJson(ProductModel data) => json.encode(data.toJson());
-
-class ProductModel {
+class Product {
     final int? id;
     final String? name;
-    final double? harga;
+    final String? description;
+    final double? price;
+    final int? stock;
 
-    ProductModel({
+    Product({
         this.id,
         this.name,
-        this.harga,
+        this.description,
+        this.price,
+        this.stock,
     });
 
-    factory ProductModel.fromJson(Map<String, dynamic> json) => ProductModel(
+    factory Product.fromJson(Map<String, dynamic> json) => Product(
         id: json["id"],
         name: json["name"],
-        harga: json["harga"]?.toDouble(),
+        description: json["description"],
+        price: double.tryParse(json["price"]),
+        stock: int.tryParse(json["stock"]),
     );
 
     Map<String, dynamic> toJson() => {
         "id": id,
         "name": name,
-        "harga": harga,
+        "description": description,
+        "price": price,
+        "stock": stock,
     };
 }

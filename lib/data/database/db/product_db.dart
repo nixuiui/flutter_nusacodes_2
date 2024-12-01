@@ -8,28 +8,28 @@ class ProductDb {
 
   ProductDb(this.db);
 
-  Future<void> addProduct(ProductModel data) async {
+  Future<void> addProduct(Product data) async {
     final product = ProductCompanion(
       name: Value(data.name ?? ''),
-      price: Value(data.harga ?? 0),
+      price: Value(data.price ?? 0),
     );
 
     await db.into(db.product).insert(product);
   }
 
-  Future<List<ProductModel>> getAllProducts() async {
+  Future<List<Product>> getAllProducts() async {
     final data = await db.select(db.product).get();
-    return data.map((e) => ProductModel(
+    return data.map((e) => Product(
       id: e.id,
       name: e.name,
-      harga: e.price,
+      price: e.price,
     )).toList();
   }
 
-  Future<void> updateProduct(ProductModel data) async {
+  Future<void> updateProduct(Product data) async {
     final product = ProductCompanion(
       name: Value(data.name ?? ''),
-      price: Value(data.harga ?? 0),
+      price: Value(data.price ?? 0),
     );
     await (db.update(db.product)
           ..where((tbl) => tbl.id.equals(data.id!)))

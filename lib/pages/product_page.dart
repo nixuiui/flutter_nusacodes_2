@@ -14,7 +14,7 @@ class _ProductPageState extends State<ProductPage> {
 
   final productDb = getIt.get<ProductDb>();
 
-  final products = <ProductModel>[];
+  final products = <Product>[];
 
   @override
   void initState() {
@@ -31,9 +31,9 @@ class _ProductPageState extends State<ProductPage> {
   }
 
   void addData() async {
-    await productDb.addProduct(ProductModel(
+    await productDb.addProduct(Product(
       name: "Product ${products.length+1}",
-      harga: 1000000,
+      price: 1000000,
     ));
     getData();
   }
@@ -54,7 +54,7 @@ class _ProductPageState extends State<ProductPage> {
         separatorBuilder: (context, index) => const Divider(), 
         itemBuilder: (context, index) => ListTile(
           title: Text(products[index].name ?? ''),
-          subtitle: Text(products[index].harga?.toString() ?? ''),
+          subtitle: Text(products[index].price?.toString() ?? ''),
           trailing: IconButton(
             onPressed: () => deleteData(products[index].id!), 
             icon: const Icon(Icons.delete)
