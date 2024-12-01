@@ -47,6 +47,7 @@ dependencies:
   build_runner: ^2.4.13
   sqlite3_flutter_libs: ^0.5.26
   drift_db_viewer: ^2.1.0
+  dio: ^5.7.0
 
 dev_dependencies:
   flutter_test:

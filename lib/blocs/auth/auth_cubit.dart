@@ -1,14 +1,16 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_nusacodes_2/blocs/auth/auth_state.dart';
 import 'package:flutter_nusacodes_2/data/local_storage/auth_local_storage.dart';
-import 'package:flutter_nusacodes_2/models/user_model.dart';
+import 'package:flutter_nusacodes_2/data/remote_data/auth_remote_data.dart';
 
 class AuthCubit extends Cubit<AuthState> {
 
   late final AuthLocalStorage authLocalStorage;
+  late final AuthRemoteData authRemoteData;
 
   AuthCubit(
-    this.authLocalStorage
+    this.authLocalStorage,
+    this.authRemoteData,
   ) : super(const AuthState());
 
   Future<void> login({
@@ -19,31 +21,21 @@ class AuthCubit extends Cubit<AuthState> {
       loading: true,
       errorMessage: ''
     ));
-    
 
-    // TODO: Check login from data resource
-    await Future.delayed(const Duration(seconds: 2));
-    if(
-      email == "randy@gmail.com" &&
-      password == "123456"
-    ) {
-      final user = User(
-        name: "Randy",
-        email: "randy@gmail.com"
-      );
-
-      await authLocalStorage.setToken(DateTime.now().millisecondsSinceEpoch.toString());
-      await authLocalStorage.setUser(user);
+    try {
+      final response = await authRemoteData.login(email, password);
+      await authLocalStorage.setToken(response.accessToken ?? '');
+      await authLocalStorage.setUser(response.user!);
 
       emit(state.copyWith(
         loading: false,
-        user: user,
+        user: response.user!,
         isLoggedIn: true
       ));
-    } else {
+    } catch (e) {
       emit(state.copyWith(
         loading: false,
-        errorMessage: "Username atau password salah"
+        errorMessage: "$e"
       ));
     }
 
@@ -60,6 +52,18 @@ class AuthCubit extends Cubit<AuthState> {
         isLoggedIn: true
       ));
       return true;
+    }
+  }
+
+  Future<void> refreshProfile() async {
+    try {
+      final user = await authRemoteData.getProfile();
+      await authLocalStorage.setUser(user);
+      emit(state.copyWith(
+        user: user,
+      ));
+    } catch (e) {
+      print('Error: $e');
     }
   }
 
