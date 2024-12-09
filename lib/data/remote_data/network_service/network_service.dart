@@ -4,9 +4,8 @@ import 'package:flutter_nusacodes_2/data/remote_data/network_service/network_exc
 import 'package:flutter_nusacodes_2/helpers/logging_interceptor.dart';
 
 class NetworkService {
-
   final requestTimeOut = 30;
-  
+
   late Dio dio;
   late final AuthLocalStorage authStorage;
 
@@ -38,10 +37,10 @@ class NetworkService {
   }) async {
     final header = await headersRequest();
     return await _safeFetch(() => dio.get(
-      url,
-      queryParameters: queryParameters ?? {},
-      options: Options(headers: header),
-    ));
+          url,
+          queryParameters: queryParameters ?? {},
+          options: Options(headers: header),
+        ));
   }
 
   Future<Response> post({
@@ -50,12 +49,10 @@ class NetworkService {
     Map<String, dynamic>? queryParameters,
   }) async {
     final header = await headersRequest();
-    return await _safeFetch(() => dio.post(
-      url,
-      data: data,
-      options: Options(headers: header),
-      queryParameters: queryParameters
-    ));
+    return await _safeFetch(() => dio.post(url,
+        data: data,
+        options: Options(headers: header),
+        queryParameters: queryParameters));
   }
 
   Future<Response> put({
@@ -65,11 +62,11 @@ class NetworkService {
   }) async {
     final header = await headersRequest();
     return await _safeFetch(() => dio.put(
-      url,
-      data: data,
-      options: Options(headers: header),
-      queryParameters: queryParameters,
-    ));
+          url,
+          data: data,
+          options: Options(headers: header),
+          queryParameters: queryParameters,
+        ));
   }
 
   Future<Response> patch({
@@ -79,25 +76,25 @@ class NetworkService {
   }) async {
     final header = await headersRequest();
     return await _safeFetch(() => dio.patch(
-      url,
-      data: data,
-      options: Options(headers: header),
-      queryParameters: queryParameters,
-    ));
+          url,
+          data: data,
+          options: Options(headers: header),
+          queryParameters: queryParameters,
+        ));
   }
 
   Future<Response> delete({
     required String url,
-    Map<String, dynamic>?  data,
+    Map<String, dynamic>? data,
     Map<String, dynamic>? parameters,
   }) async {
     final header = await headersRequest();
     return await _safeFetch(() => dio.delete(
-      url,
-      data: data,
-      queryParameters: parameters,
-      options: Options(headers: header),
-    ));
+          url,
+          data: data,
+          queryParameters: parameters,
+          options: Options(headers: header),
+        ));
   }
 
   Future<Response> _safeFetch(Future<Response> Function() tryFetch) async {
