@@ -9,9 +9,10 @@ class WebViewPage extends StatefulWidget {
 }
 
 class _WebViewPageState extends State<WebViewPage> with WidgetsBindingObserver {
-
   AppLifecycleState? lastScreenState;
   late final WebViewController _controller;
+  final urlController = TextEditingController();
+  String? url;
 
   @override
   void initState() {
@@ -20,40 +21,31 @@ class _WebViewPageState extends State<WebViewPage> with WidgetsBindingObserver {
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
       ..setNavigationDelegate(
         NavigationDelegate(
-          onProgress: (int progress) {
-            // Update loading bar.
-          },
+          onProgress: (int progress) {},
           onPageStarted: (String url) {},
           onPageFinished: (String url) {},
           onHttpError: (HttpResponseError error) {},
           onWebResourceError: (WebResourceError error) {},
-          onNavigationRequest: (NavigationRequest request) {
-            if (request.url.startsWith('https://www.youtube.com/')) {
-              return NavigationDecision.prevent;
-            }
-            return NavigationDecision.navigate;
-          },
         ),
-      )
-      ..loadRequest(Uri.parse('https://flutter.dev'));
+      );
     super.initState();
   }
 
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
-    if(lastScreenState != AppLifecycleState.paused) {
+    if (lastScreenState != AppLifecycleState.paused) {
       setState(() {
         lastScreenState = state;
       });
     } else {
       showDialog(
-        context: context, 
-        barrierDismissible: false,
-        builder: (context) => const AlertDialog(
-          title: Text("Anda Telah Minimize App"),
-          content: Text("Anda tidak bisa lagi mengelola aplikasi, silahkan keluar dari APP"),
-        )
-      );
+          context: context,
+          barrierDismissible: false,
+          builder: (context) => const AlertDialog(
+                title: Text("Anda Telah Minimize App"),
+                content: Text(
+                    "Anda tidak bisa lagi mengelola aplikasi, silahkan keluar dari APP"),
+              ));
     }
     super.didChangeAppLifecycleState(state);
   }
@@ -64,7 +56,23 @@ class _WebViewPageState extends State<WebViewPage> with WidgetsBindingObserver {
       appBar: AppBar(
         title: const Text("Web View"),
       ),
-      body: WebViewWidget(controller: _controller),
+      body: url != null
+          ? WebViewWidget(controller: _controller)
+          : ListView(
+              padding: const EdgeInsets.all(16),
+              children: [
+                TextFormField(
+                  controller: urlController,
+                  decoration: const InputDecoration(hintText: 'Masukan Url'),
+                  onFieldSubmitted: (value) {
+                    _controller.loadRequest(Uri.parse(value));
+                    setState(() {
+                      url = value;
+                    });
+                  },
+                ),
+              ],
+            ),
     );
   }
 }
