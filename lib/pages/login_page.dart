@@ -12,7 +12,6 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
 
@@ -29,26 +28,23 @@ class _LoginPageState extends State<LoginPage> {
     return MultiBlocListener(
       listeners: [
         BlocListener<AuthCubit, AuthState>(
-          listenWhen: (p, c) => (
-            (p.errorMessage == '' && c.errorMessage != '') ||
-            (p.isLoggedIn == false && c.isLoggedIn == true)
-          ),
+          listenWhen: (p, c) =>
+              ((p.errorMessage == '' && c.errorMessage != '') ||
+                  (p.isLoggedIn == false && c.isLoggedIn == true)),
           listener: (context, state) {
-            if(state.errorMessage != '') {
+            if (state.errorMessage != '') {
               showDialog(
-                context: context, 
-                builder: (context) => AlertDialog(
-                  title: const Text('Gagal Login'),
-                  content: Text(state.errorMessage),
-                  actions: [
-                    FilledButton(
-                      onPressed: () => Navigator.pop(context), 
-                      child: const Text('OK')
-                    )
-                  ],
-                )
-              );
-            } else if(state.isLoggedIn) {
+                  context: context,
+                  builder: (context) => AlertDialog(
+                        title: const Text('Gagal Login'),
+                        content: Text(state.errorMessage),
+                        actions: [
+                          FilledButton(
+                              onPressed: () => Navigator.pop(context),
+                              child: const Text('OK'))
+                        ],
+                      ));
+            } else if (state.isLoggedIn) {
               Navigator.pushReplacementNamed(context, AppRoutes.home);
             }
           },
@@ -78,21 +74,18 @@ class _LoginPageState extends State<LoginPage> {
               ),
             ),
             const SizedBox(height: 16),
-            BlocBuilder<AuthCubit, AuthState>(
-              builder: (context, state) {
-                return FilledButton(
-                  onPressed: () => authCubit.login(
+            BlocBuilder<AuthCubit, AuthState>(builder: (context, state) {
+              return FilledButton(
+                onPressed: () => authCubit.login(
                     email: emailController.text,
-                    password: passwordController.text
-                  ), 
-                  child: state.loading 
-                      ? const CircularProgressIndicator(
+                    password: passwordController.text),
+                child: state.loading
+                    ? const CircularProgressIndicator(
                         backgroundColor: Colors.white,
-                      ) 
-                      : const Text("Login"),
-                );
-              }
-            )
+                      )
+                    : const Text("Login"),
+              );
+            })
           ],
         ),
       ),

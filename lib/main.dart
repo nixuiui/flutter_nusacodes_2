@@ -41,7 +41,7 @@ class MyApp extends StatelessWidget {
           ),
           useMaterial3: true,
         ),
-        initialRoute: AppRoutes.splash,
+        initialRoute: AppRoutes.webView,
         routes: routes,
       ),
     );

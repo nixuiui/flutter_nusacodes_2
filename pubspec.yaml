@@ -48,6 +48,7 @@ dependencies:
   drift_db_viewer: ^2.1.0
   dio: ^5.7.0
   intl: ^0.20.1
+  webview_flutter: ^4.4.0
 
 dev_dependencies:
   flutter_test:
